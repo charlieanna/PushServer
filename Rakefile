@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pushserver::Application.load_tasks
+PushServer::Application.load_tasks
