@@ -49,11 +49,11 @@ class PushController < ApplicationController
     device_identifiers_string.each do |device|
          
            full_device = Device.find_by_device_identifier(device)
-   #        if(full_device != nil)
+           if(full_device != nil)
          
            puts full_device
            send_push(full_device,message)
-   #      end
+         end
          end
       # device = Device.find_by_device_identifier(device_identifiers_string)
     
