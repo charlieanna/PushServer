@@ -47,7 +47,7 @@ class PushController < ApplicationController
    end
    #  devices.uniq!
    # puts devices
-   
+   if device_identifiers_string != nil
     device_identifiers_string.each do |device|
          
            full_device = Device.find_by_device_identifier(device)
@@ -57,6 +57,7 @@ class PushController < ApplicationController
            send_push(full_device,message)
          end
          end
+   end
     
    render :nothing => true, :status => 200
   end
