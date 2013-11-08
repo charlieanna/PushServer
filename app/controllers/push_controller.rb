@@ -42,7 +42,9 @@ class PushController < ApplicationController
    device_identifiers_string =  push["devices"]
    p device_identifiers_string
    message = push["message"]
-   message_to_send = "You have receieved a message from " + (message)
+   if message != nil
+     message_to_send = "You have receieved a message from " + (message)
+   end
    #  devices.uniq!
    # puts devices
    
@@ -55,10 +57,7 @@ class PushController < ApplicationController
            send_push(full_device,message)
          end
          end
-      # device = Device.find_by_device_identifier(device_identifiers_string)
     
-     # send_push(device,message)
-    #     puts "RENDER"
    render :nothing => true, :status => 200
   end
 
