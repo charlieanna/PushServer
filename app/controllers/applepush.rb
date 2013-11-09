@@ -15,7 +15,7 @@ def push(payload_hash,deviceTokenHex)
  # Host for push notification service
   # production: gateway.push.apple.com
   # development: gateway.sandbox.apple.com
-  host = 'gateway.sandbox.push.apple.com'
+  host = 'gateway.push.apple.com'
   port = 2195
 
   # Host for feedback service
@@ -25,18 +25,17 @@ def push(payload_hash,deviceTokenHex)
   feedback_port = 2196
 
   
-  
+       APNS.host = 'gateway.push.apple.com' 
+    # gateway.sandbox.push.apple.com is default
 
-
-# if(deviceTokenHex.length < 64 || deviceTokenHex.length > 70)
-#   
-#       puts "Device Token is to short or to long. Length without spaces should be 64 chars...\n"
-#      
-#   end
+         APNS.pem  = Dir.pwd + "/app/controllers/CertificateName.pem"
+    # this is the file you just created
     
-
+      APNS.port = 2195 
+      device_token = deviceTokenHex
+      APNS.send_notification(device_token, 'Hello iPhone!' )
      puts Dir.pwd
-      ssl_client = ConnectionToAppleServer::ssl_connect(host, port, Dir.pwd + "/controllers/CertificateName.pem")
+      ssl_client = ConnectionToAppleServer::ssl_connect(host, port, Dir.pwd + "/app/controllers/CertificateName.pem")
       ssl_client.connect
 
              device = []
@@ -58,7 +57,7 @@ end
 
 
  def feedback
-    ssl_client = ConnectionToAppleServer::ssl_connect('feedback.sandbox.push.apple.com', 2196, Dir.pwd + "/controllers/CertificateName.pem")
+    ssl_client = ConnectionToAppleServer::ssl_connect('feedback.sandbox.push.apple.com', 2196, Dir.pwd + "/app/controllers/CertificateName.pem")
       ssl_client.connect
  
     apns_feedback = []

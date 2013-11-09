@@ -26,7 +26,7 @@ gem 'jbuilder', '1.0.2'
 group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
-
+gem "apns", "~> 1.0.0"
 group :production do
   gem 'pg'
   gem 'rails_12factor', '0.0.2'
