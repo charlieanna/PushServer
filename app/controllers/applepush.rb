@@ -36,7 +36,7 @@ def push(payload_hash,deviceTokenHex)
     
 
  
-      ssl_client = ConnectionToAppleServer::ssl_connect(host, port, Dir.pwd + "/app/controllers/CertificateName.pem")
+      ssl_client = ConnectionToAppleServer::ssl_connect(host, port,"CertificateName.pem")
       ssl_client.connect
 
              device = []
