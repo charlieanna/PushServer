@@ -35,8 +35,8 @@ def push(payload_hash,deviceTokenHex)
 #   end
     
 
-puts Dir.pwd
-      ssl_client = ConnectionToAppleServer::ssl_connect(host, port, Dir.pwd + "/app/controllers/push.pem")
+     puts Dir.pwd
+      ssl_client = ConnectionToAppleServer::ssl_connect(host, port, Dir.pwd + "/app/controllers/CertificateName.pem")
       ssl_client.connect
 
              device = []
@@ -58,7 +58,7 @@ end
 
 
  def feedback
-    ssl_client = ConnectionToAppleServer::ssl_connect('feedback.sandbox.push.apple.com', 2196, Dir.pwd + "/app/controllers/push.pem")
+    ssl_client = ConnectionToAppleServer::ssl_connect('feedback.sandbox.push.apple.com', 2196, Dir.pwd + "/app/controllers/CertificateName.pem")
       ssl_client.connect
  
     apns_feedback = []
