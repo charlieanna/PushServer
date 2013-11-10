@@ -44,7 +44,7 @@ class PushController < ApplicationController
    p device_identifiers_string
    message = push["message"]
    if message != nil
-     message_to_send = "You have receieved a message from " + (message)
+     message_to_send = "You have a new #{message}"
    end
    #  devices.uniq!
    # puts devices
@@ -55,7 +55,7 @@ class PushController < ApplicationController
            if(full_device != nil)
          
            puts full_device
-           send_push(full_device,message)
+           send_push(full_device,message_to_send)
          end
          end
    end
