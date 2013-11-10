@@ -55,7 +55,7 @@ class PushController < ApplicationController
            if(full_device != nil)
          
            puts full_device
-           send_push(full_device,message_to_send)
+           send_push(full_device,message)
          end
          end
    end
@@ -103,7 +103,7 @@ class PushController < ApplicationController
       payload_hash = {}
         payload_hash['aps'] = {}
             payload_hash['aps']['alert'] = {}
-            payload_hash['aps']['alert']['body'] = message
+            payload_hash['aps']['alert']['body'] = "You have a new timetable"
             payload_hash['aps']['sound'] = "default"
             payload_hash['aps']['badge'] = 1
             payload_hash["app"] = "timetable"
