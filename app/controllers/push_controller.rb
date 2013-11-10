@@ -1,3 +1,4 @@
+# http://quickblox.com/developers/How_to_create_APNS_certificates
 require 'androidpush'
 require 'applepush'
 class PushController < ApplicationController
