@@ -44,7 +44,7 @@ class PushController < ApplicationController
    p device_identifiers_string
    message = push["message"]
    if message != nil
-     message_to_send = "You have a new #{message}"
+     message_to_send = "You have a new timetable"
    end
    #  devices.uniq!
    # puts devices
