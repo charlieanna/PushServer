@@ -43,6 +43,7 @@ class PushController < ApplicationController
    device_identifiers_string =  push["devices"]
    p device_identifiers_string
    message = push["message"]
+   app = push["app"]
    if message != nil
      message_to_send = "You have a new timetable"
    end
@@ -55,7 +56,7 @@ class PushController < ApplicationController
            if(full_device != nil)
          
            puts full_device
-           send_push(full_device,message)
+           send_push(full_device,message,app)
          end
          end
    end
@@ -94,7 +95,7 @@ class PushController < ApplicationController
        render :nothing => true, :status => 200, :content_type => 'text/html'
   end
   
-  def send_push(device,message)
+  def send_push(device,message,app)
     
     puts "DSVDSVSDVDSSDV"
     device_type = device.device_type
@@ -106,7 +107,7 @@ class PushController < ApplicationController
             payload_hash['aps']['alert']['body'] = "You have a new timetable"
             payload_hash['aps']['sound'] = "default"
             payload_hash['aps']['badge'] = 1
-            payload_hash["app"] = "timetable"
+            payload_hash["app"] = app
             payload_hash["url"] = message
       deviceTokenHex = device.registration_id
       b = ApplePush.new
