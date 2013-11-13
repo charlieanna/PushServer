@@ -44,6 +44,7 @@ class PushController < ApplicationController
    p device_identifiers_string
    message = push["message"]
    app = push["app"]
+   from = push["from"]
    if message != nil
      message_to_send = "You have a new timetable"
    end
@@ -56,7 +57,7 @@ class PushController < ApplicationController
            if(full_device != nil)
          
            puts full_device
-           send_push(full_device,message,app)
+           send_push(full_device,message,app,from)
          end
          end
    end
@@ -67,35 +68,9 @@ class PushController < ApplicationController
   def send_to_device
   end
 
-  def push_to_app
-    app_name = params[:app]
-    message = params[:message]
-    #find all the users who have installed the app or r using it and send them a push.
-    users = app.find_by_name(app_name).users
-    
-    
-   users.each do |jabber_user|
-          i = jabber_user.index('/')
-          puts i
-          if(i!=nil)
-          jabber_user = jabber_user[0,i]
-          puts jabber_user
-        end
-          user = User.find_by_jabber_id(jabber_user)
-          if(user != nil)
-          puts user
-          device_identifier = user.device_identifier
-          puts device_identifier
-          device = Device.find_by_device_identifier(device_identifier)
-          puts device
-          send_push(device,message_to_send)
-        end
-        end
-        puts "RENDER"
-       render :nothing => true, :status => 200, :content_type => 'text/html'
-  end
+ 
   
-  def send_push(device,message,app)
+  def send_push(device,message,app,from)
     
     puts "DSVDSVSDVDSSDV"
     device_type = device.device_type
@@ -104,7 +79,7 @@ class PushController < ApplicationController
       payload_hash = {}
         payload_hash['aps'] = {}
             payload_hash['aps']['alert'] = {}
-            payload_hash['aps']['alert']['body'] = "You have a new #{app}"
+            payload_hash['aps']['alert']['body'] = "You have a new #{app} from #{from}"
             payload_hash['aps']['sound'] = "default"
             payload_hash['aps']['badge'] = 1
             payload_hash["app"] = app
