@@ -44,7 +44,7 @@ class PushController < ApplicationController
    p device_identifiers_string
    message = push["message"]
    app = push["app"]
-   from = push["from"]
+   # from = push["from"]
    if message != nil
      message_to_send = "You have a new timetable"
    end
@@ -57,7 +57,7 @@ class PushController < ApplicationController
            if(full_device != nil)
          
            puts full_device
-           send_push(full_device,message,app,from)
+           send_push(full_device,message,app)
          end
          end
    end
@@ -70,7 +70,7 @@ class PushController < ApplicationController
 
  
   
-  def send_push(device,message,app,from)
+  def send_push(device,message,app)
     
     puts "DSVDSVSDVDSSDV"
     device_type = device.device_type
@@ -79,7 +79,7 @@ class PushController < ApplicationController
       payload_hash = {}
         payload_hash['aps'] = {}
             payload_hash['aps']['alert'] = {}
-            payload_hash['aps']['alert']['body'] = "You have a new #{app} from #{from}"
+            payload_hash['aps']['alert']['body'] = "You have a new #{app}"
             payload_hash['aps']['sound'] = "default"
             payload_hash['aps']['badge'] = 1
             payload_hash["app"] = app
