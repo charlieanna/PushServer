@@ -107,7 +107,7 @@ class PushController < ApplicationController
  #            payload_hash['aps']['alert']['body'] = "timetable"
  #            payload_hash['aps']['sound'] = "default"
  #            payload_hash['aps']['badge'] = 1
-            android_payload["app"] = "timetable"
+            android_payload["app"] = app
             android_payload["url"] = message
 
         body["data"] = android_payload
