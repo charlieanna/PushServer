@@ -15,6 +15,9 @@ group :test do
   
 end
  gem 'unicorn'
+ gem 'sidekiq'
+ gem 'sinatra', require: false
+ gem 'slim'
 gem "multi_json", "~> 1.8.2"
 gem 'sass-rails', '4.0.0'
 gem 'uglifier', '2.1.1'

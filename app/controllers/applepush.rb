@@ -5,18 +5,18 @@ require 'ssl_helper'
 require 'openssl'
 #
 class ApplePush
-  include ConnectionToAppleServer
   def push(payload_hash, deviceTokenHex)
     host = 'gateway.sandbox.push.apple.com'
     path =  Dir.pwd + '/app/controllers/CertificateName.pem'
-    ssl_client = ssl_connect(host, 2195, path)
+    ssl_client = ConnectionToAppleServer::ssl_connect(host, 2195, path)
     ssl_client.connect
     device = [deviceTokenHex]
     device_token_binary = device.pack('H*')
     pt = device_token_binary
     pm = payload_hash.to_json
     message = [0, 0, 32, pt, 0, pm.size, pm].pack('ccca*cca*')
-    ssl_client.write(message).flush
+    ssl_client.write(message)
+    ssl_client.flush
   end
 
   # def feedback
