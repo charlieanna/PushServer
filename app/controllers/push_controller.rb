@@ -27,11 +27,13 @@ class PushController < ApplicationController
       device_identifiers_string.each do |device|
       
         full_device = Device.find_by(device_identifier: device)
-        args = {}
-        args['id'] = full_device.id
-        args['message'] = message
-        args['app'] = app
-        PygmentsWorker.perform_async(args)  unless full_device.nil? 
+        unless full_device.nil?
+          args = {}
+          args['id'] = full_device.id
+          args['message'] = message
+          args['app'] = app
+          PygmentsWorker.perform_async(args)  unless full_device.nil? 
+        end
        end
      end
     render nothing: true, status: 200
