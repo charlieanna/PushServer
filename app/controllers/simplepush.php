@@ -1,10 +1,10 @@
 <?php
 
 // Put your device token here (without spaces):
-$deviceToken = 'a078f1658f68521a278d0f5c41b9c4b0613e4a6ddc157fd8ed1567cda5634da4';
+$deviceToken = '0C2C51D03FA6126CD25537F7CA68B32685B129629EE512DD8B0A4B61CB9B76B9';
 
 // Put your private key's passphrase here:
-$passphrase = '';
+$passphrase = 'akk322';
 
 // Put your alert message here:
 $message = 'My first push notification!';
@@ -12,12 +12,12 @@ $message = 'My first push notification!';
 ////////////////////////////////////////////////////////////////////////////////
 
 $ctx = stream_context_create();
-stream_context_set_option($ctx, 'ssl', 'local_cert', 'push.pem');
+stream_context_set_option($ctx, 'ssl', 'local_cert', 'ProductionCertificate.pem');
 stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 
 // Open a connection to the APNS server
 $fp = stream_socket_client(
-	'ssl://gateway.sandbox.push.apple.com:2195', $err,
+	'ssl://gateway.push.apple.com:2195', $err,
 	$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
 
 if (!$fp)
