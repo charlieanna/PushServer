@@ -6,8 +6,8 @@ require 'openssl'
 #
 class ApplePush
   def push(payload_hash, deviceTokenHex)
-    host = 'gateway.push.apple.com'
-    path =  Dir.pwd + '/app/controllers/ProductionCertificate.pem'
+    host = 'gateway.sandbox.push.apple.com'
+    path =  Dir.pwd + '/app/controllers/CertificateName.pem'
     ssl_client = ConnectionToAppleServer::ssl_connect(host, 2195, path)
     ssl_client.connect
     device = [deviceTokenHex]
