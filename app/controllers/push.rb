@@ -29,7 +29,7 @@ class Push
     ApplePush.new.push(payload_hash, device_token_hex)
   end
 
-  def send_to_android(device, message, app)
+  def send_to_android(device, message, app,from)
     body = {}
     arr = []
     arr << device.registration_id
@@ -39,7 +39,7 @@ class Push
       #    body['data'] = 'Hi this is my first push message'
       #    body['delay_while_idle'] = # true or false
       #    body['time_to_live'] = # number in seconds
-    android_payload = { 'message' => message }
+    android_payload = { 'message' =>  "You have a new #{app} from #{from}" }
     android_payload['app'] = app
     android_payload['url'] = message
     body['data'] = android_payload
