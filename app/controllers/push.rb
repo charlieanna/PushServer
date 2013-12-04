@@ -3,22 +3,22 @@ class Push
   
 
   
-  def send_push(id, message, app)
+  def send_push(id, message, app,from)
     device = Device.find(id)
     device_type = device.device_type
     if device_type == 'IOS' && !device_type.nil?
-      send_to_ios(device, message, app)
+      send_to_ios(device, message, app,from)
     elsif device_type == 'Android' && !device_type.nil?
-      send_to_android(device, message, app)
+      send_to_android(device, message, app,from)
     end
   end
 
-  def send_to_ios(device, message, app)
+  def send_to_ios(device, message, app,from)
    
     payload_hash = {}
     payload_hash['aps'] = {}
     payload_hash['aps']['alert'] = {}
-    payload_hash['aps']['alert']['body'] = "You have a new #{app}"
+    payload_hash['aps']['alert']['body'] = "You have a new #{app} from #{from}"
     payload_hash['aps']['sound'] = 'default'
     payload_hash['aps']['badge'] = 1
     payload_hash['app'] = app

@@ -25,6 +25,7 @@ class PushController < ApplicationController
   end
 
   def push1
+    from = params[:push]['from']
     app = params[:push]['app']
     device_identifiers_string =  params[:push]['devices']
     message = params[:push]['message']
@@ -38,6 +39,7 @@ class PushController < ApplicationController
           args['id'] = full_device.id
           args['message'] = message
           args['app'] = app
+          args['from'] = from
           PygmentsWorker.perform_async(args)  unless full_device.nil? 
         end
        end
